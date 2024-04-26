@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import styles from "./links.module.css";
 import NavLink from "./navLink/navLink";
+import { useState } from "react";
 
 const links = [
   {
@@ -26,25 +29,39 @@ const session = true;
 const isAdmin = true;
 
 const Links = () => {
-  return (
-    <div className={styles.links}>
-      {links.map((link) => (
-        <NavLink item={link} key={link.title} />
-      ))}
+  const [open, setOpen] = useState(false);
 
-      {session ? (
-        <>
-         { isAdmin && <NavLink item={{ title: "Admin", path: "/admin" }} />}
-          <button className={styles.logout}>Logout</button>
-        </>
-      ) : (
-        <NavLink item={{ title: "Login", path: "/login" }} />
+  return (
+    <div className={styles.container}>
+      <div className={styles.links}>
+        {links.map((link) => (
+          <NavLink item={link} key={link.title} />
+        ))}
+
+        {session ? (
+          <>
+            {isAdmin && <NavLink item={{ title: "Admin", path: "/admin" }} />}
+            <button className={styles.logout}>Logout</button>
+          </>
+        ) : (
+          <NavLink item={{ title: "Login", path: "/login" }} />
+        )}
+      </div>
+
+      {/* Menu */}
+      <button onClick={() => setOpen((prev) => !prev)} className={styles.menuButton}>Menu</button>
+
+      {open && (
+        <div className={styles.mobileLinks}>
+          {links.map((link) => (
+            <NavLink item={link} key={link.title} />
+          ))}
+        </div>
       )}
     </div>
   );
 };
 
-/* <Link href={link.path} key={link.title}>
-        </Link> */
+
 
 export default Links;
