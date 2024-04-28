@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import styles from "./links.module.css";
+import Image from "next/image";
 import NavLink from "./navLink/navLink";
 import { useState } from "react";
 
@@ -49,7 +50,15 @@ const Links = () => {
       </div>
 
       {/* Menu */}
-      <button onClick={() => setOpen((prev) => !prev)} className={styles.menuButton}>Menu</button>
+
+      <Image
+        src="/menu.png"
+        alt="menu"
+        width={30}
+        height={30}
+        onClick={() => setOpen((prev) => !prev)}
+        className={styles.menuButton}
+      />
 
       {open && (
         <div className={styles.mobileLinks}>
@@ -61,7 +70,5 @@ const Links = () => {
     </div>
   );
 };
-
-
 
 export default Links;
