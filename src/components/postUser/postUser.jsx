@@ -1,3 +1,4 @@
+import { getUser } from "@/lib/data";
 import styles from "./postUser.module.css";
 import Image from "next/image";
 
@@ -14,7 +15,12 @@ import Image from "next/image";
 // };
 
 const PostUser = async ({ userId }) => {
-  const user = await getData(userId);
+  //FETCH DATA WITH AN API
+  // const user = await getData(userId);
+
+  //FETCH DATA WITHOUT AN API
+  const user = await getUser(userId);
+
   return (
     <div className={styles.container}>
       <div className={styles.texts}>
